@@ -76,5 +76,6 @@
             @yield('content')
         </main>
     </div>
+    <script src="./public/js/fileInputChange.js"></script>
 </body>
 </html>
