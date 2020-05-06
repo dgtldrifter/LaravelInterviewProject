@@ -66,8 +66,8 @@ class HomeController extends Controller
                     // Insert into DB
                     foreach ($importArray as $importData) {
                         $insertInfo = array(
-                            "first-name" => $importData[1],
-                            "last-name" => $importData[2],
+                            "first_name" => $importData[1],
+                            "last_name" => $importData[2],
                             "email" => $importData[3],
                             "gender" => $importData[4],
                             "ip_address" => $importData[5]);
