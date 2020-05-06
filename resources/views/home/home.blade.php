@@ -50,6 +50,7 @@
                     echo '<td>'.$client->email.'</td>';
                     echo '<td>'.$client->gender.'</td>';
                     echo '<td>'.$client->ip_address.'</td>';
+                    echo '<td></td>';
                     echo '</tr>';
                 }?>
             </tbody>
