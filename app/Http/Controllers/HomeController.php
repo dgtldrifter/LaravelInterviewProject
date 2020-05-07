@@ -14,6 +14,9 @@ class HomeController extends Controller
 
     public function uploadFile(Request $request)
     {
+        $u_id = auth()->user()->id;
+
+
         if ($request->input('submit') != null) {
             $file = $request->file('file');
 
@@ -70,7 +73,8 @@ class HomeController extends Controller
                             "last_name" => $importData[2],
                             "email" => $importData[3],
                             "gender" => $importData[4],
-                            "ip_address" => $importData[5]);
+                            "ip_address" => $importData[5],
+                            "user_id" => $u_id);
 
                         Client::insertData($insertInfo);
                     }
@@ -84,5 +88,28 @@ class HomeController extends Controller
 
         //redirect to clients page
         return redirect()->action('HomeController@index')->with('message', "Data imported!");
+    }
+
+    public function addSingleUser(Request $request) {
+        $u_id = auth()->user()->id;
+
+        if ($request->input('submit') != null) {
+            $first_name = $request->input('f_name');
+            $last_name = $request->input('l_name');
+            $email = $request->input('email');
+            $gender = $request->input('options');
+            $ip_address = $request->input('ip_address');
+
+            $insertInfo = array (
+                "first_name" => $first_name,
+                "last_name" => $last_name,
+                "email" => $email,
+                "gender" => $gender,
+                "ip_address" => $ip_address,
+                "user_id" => $u_id);
+
+            Client::insertData($insertInfo);
+        }
+        return redirect()->action('HomeController@index')->with('message', 'User Added!');
     }
 }

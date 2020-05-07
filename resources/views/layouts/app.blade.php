@@ -80,9 +80,18 @@
     <script src="./public/js/fileInputChange.js"></script>
     <script src="http://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
     <script>
-        $(document).ready(function() {
-            $('#datatable').DataTable();
-        } );
+        function addUser(){
+            var containing_row = $(this).closest('tr');
+            console.log(containing_row);
+            var row_data = $(containing_row).select('td');
+            console.log(row_data.data())
+            $.each(row_data, function(item){
+                console.log(item)
+            })
+
+
+            $.ajax()
+        }
     </script>
 </body>
 </html>

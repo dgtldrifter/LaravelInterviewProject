@@ -14,12 +14,16 @@ class Clients extends Migration
     public function up()
     {
         Schema::create('clients', function(Blueprint $table) {
-            $table->increments('id')->unique();
+            $table->increments('id');
             $table->string('first_name');
             $table->string('last_name');
-            $table->string('email');
+            $table->string('email')->unique();
             $table->string('gender');
             $table->string('ip_address');
+            $table->unsignedBigInteger('user_id');
+
+            // foreign key constraint
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

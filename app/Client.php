@@ -14,4 +14,17 @@ class Client extends Model
         $value=DB::table('clients')->where('email', $data['email'])->get();
         if($value->count() == 0) {DB::table('clients')->insert($data); }
     }
+
+    public static function getClientsByUserId()
+    {
+        return DB::table('clients')->where('user_id', auth()->user()->id)->get();
+    }
+
+    public static function addUserFromClient($client) {
+
+    }
+
+    public static function deleteClient($client) {
+
+    }
 }
