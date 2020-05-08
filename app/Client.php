@@ -19,12 +19,4 @@ class Client extends Model
     {
         return DB::table('clients')->where('user_id', auth()->user()->id)->get();
     }
-
-    public static function addUserFromClient($client) {
-
-    }
-
-    public static function deleteClient($client) {
-
-    }
 }

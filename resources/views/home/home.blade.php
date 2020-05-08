@@ -32,7 +32,7 @@
                         Add Single User
                     </div>
                     <div class="card-body">
-                        <form method="post" action="/addSingleUser">
+                        <form method="post" action="/addSingleClient">
                             {{ csrf_field() }}
                             <div class="form-group">
                                 <label for="f_name" class="">First Name:</label>
@@ -87,13 +87,13 @@
                 // checks if query returned any rows
                 if($clients->first()){
                     foreach ($clients as $client) {
-                        echo '<tr name='.$client->id.'>';
-                        echo '<td>'.$client->first_name.'</td>';
-                        echo '<td>'.$client->last_name.'</td>';
-                        echo '<td>'.$client->email.'</td>';
-                        echo '<td>'.$client->gender.'</td>';
-                        echo '<td>'.$client->ip_address.'</td>';
-                        echo '<td><button type="button" class="btn btn-outline-secondary" name="button" value="Create User" onclick="addUser()"></td>';
+                        echo '<tr>';
+                        echo '<td id="firstName">'.$client->first_name.'</td>';
+                        echo '<td id="lastName">'.$client->last_name.'</td>';
+                        echo '<td id="email">'.$client->email.'</td>';
+                        echo '<td id="gender">'.$client->gender.'</td>';
+                        echo '<td id="ipAddress">'.$client->ip_address.'</td>';
+                        echo '<td><button id="createBtn" type="button" class="btn btn-outline-secondary" name="button" value="Create User"></td>';
                         echo '</tr>';
                 }
                 }?>

@@ -77,21 +77,37 @@
             @yield('content')
         </main>
     </div>
+    <script
+        src="https://code.jquery.com/jquery-3.5.1.min.js"
+        integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+        crossorigin="anonymous"></script>
     <script src="./public/js/fileInputChange.js"></script>
     <script src="http://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
     <script>
-        function addUser(){
-            var containing_row = $(this).closest('tr');
-            console.log(containing_row);
-            var row_data = $(containing_row).select('td');
-            console.log(row_data.data())
-            $.each(row_data, function(item){
-                console.log(item)
+        $(document).ready(function() {
+            $('button#createBtn').click(function() {
+                var row = $(this).closest('tr');
+                var email = $(row).children('td#email')
+                console.log(email.html())
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/createUserFromClient',
+                    async: false,
+                    datatype: 'json',
+                    data: "{email: '" + email + "'}",
+                    success: function(data)
+                    {
+                        if(data)
+                        {
+                            console.log(data)
+                        } else {
+                            console.log('nothing returned')
+                        }
+                    }
+                })
             })
-
-
-            $.ajax()
-        }
+        })
     </script>
 </body>
 </html>

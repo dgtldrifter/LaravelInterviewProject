@@ -90,7 +90,7 @@ class HomeController extends Controller
         return redirect()->action('HomeController@index')->with('message', "Data imported!");
     }
 
-    public function addSingleUser(Request $request) {
+    public function addSingleClient(Request $request) {
         $u_id = auth()->user()->id;
 
         if ($request->input('submit') != null) {
@@ -111,5 +111,13 @@ class HomeController extends Controller
             Client::insertData($insertInfo);
         }
         return redirect()->action('HomeController@index')->with('message', 'User Added!');
+    }
+
+    public static function addUserFromClient(Request $request) {
+
+    }
+
+    public static function deleteClient($client) {
+
     }
 }
