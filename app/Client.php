@@ -19,4 +19,10 @@ class Client extends Model
     {
         return DB::table('clients')->where('user_id', auth()->user()->id)->get();
     }
+
+    public static function getCilentByEmail($email) {
+        return DB::table('clients')
+            ->where('email', $email)
+            ->first();
+    }
 }

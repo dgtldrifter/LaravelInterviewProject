@@ -84,25 +84,32 @@
     <script src="./public/js/fileInputChange.js"></script>
     <script src="http://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
     <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+    </script>
+    <script>
         $(document).ready(function() {
             $('button#createBtn').click(function() {
                 var row = $(this).closest('tr');
-                var email = $(row).children('td#email')
-                console.log(email.html())
+                var email = $(row).children('td#email').html()
+                console.log(email)
 
                 $.ajax({
                     type: 'POST',
                     url: '/createUserFromClient',
                     async: false,
                     datatype: 'json',
-                    data: "{email: '" + email + "'}",
+                    data: {'email': email},
                     success: function(data)
                     {
                         if(data)
                         {
                             console.log(data)
                         } else {
-                            console.log('nothing returned')
+                            console.log('nothing returned ')
                         }
                     }
                 })

@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Client;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Symfony\Component\Console\Output\ConsoleOutput;
 
 class HomeController extends Controller
 {
@@ -110,11 +113,22 @@ class HomeController extends Controller
 
             Client::insertData($insertInfo);
         }
-        return redirect()->action('HomeController@index')->with('message', 'User Added!');
+        return redirect()->action('HomeController@index')->with('message', 'Client Added!');
     }
 
-    public static function addUserFromClient(Request $request) {
+    public function createUserFromClient(Request $request) {
+        $json = json_decode($request, true);
+        $email = $request->email;
 
+        $client = Client::getCilentByEmail($email);
+
+        User::create([
+            'name' => $client->first_name." ".$client->last_name,
+            'email' => $client->email,
+            'password' => Hash::make("password")
+        ]);
+
+       return redirect()->action('HomeController@index')->with('message', 'User Created');
     }
 
     public static function deleteClient($client) {

@@ -22,4 +22,4 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::post('uploadFile', 'HomeController@uploadFile');
 Route::post('/addSingleClient', 'HomeController@addSingleClient');
-Route::post('/addUserFromClient, HomeController@addUserFromClient');
+Route::post('/createUserFromClient', 'HomeController@createUserFromClient');
