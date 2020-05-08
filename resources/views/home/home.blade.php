@@ -67,6 +67,10 @@
             </div>
         </div>
     </div>
+    <?php
+        $noOfRows = App\Client::getNumberOfClients();
+        echo '<div class="align-content-center text-center"><p>There is a total of '.$noOfRows.' users that you\'re responsible for.</p></div>'
+    ?>
     <div class="container">
         <table id="datatable" class="table table-striped table-bordered" style="width:100%">
             <thead>
@@ -83,7 +87,6 @@
             <?php
             use Illuminate\Support\Facades\DB;
             $clients = App\Client::getClientsByUserId();
-
                 // checks if query returned any rows
                 if($clients->first()){
                     foreach ($clients as $client) {
