@@ -25,4 +25,11 @@ class Client extends Model
             ->where('email', $email)
             ->first();
     }
+
+    public function getClientsForExport() {
+        return DB::select(DB::raw("select c.first_name, c.last_name, COALESCE(u.email, 'N/A') as 'User Account'
+                                from clients as c
+                                left join users as u on c.email = u.email
+                                where c.user_id = 1  "));
+    }
 }

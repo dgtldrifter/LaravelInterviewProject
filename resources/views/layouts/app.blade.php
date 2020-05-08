@@ -107,7 +107,7 @@
                     {
                         if(data)
                         {
-                            console.log(data)
+                            window.location.href = 'home';
                         } else {
                             console.log('nothing returned ')
                         }

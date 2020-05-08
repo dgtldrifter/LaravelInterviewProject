@@ -17,7 +17,7 @@ class Clients extends Migration
             $table->increments('id');
             $table->string('first_name');
             $table->string('last_name');
-            $table->string('email')->unique();
+            $table->string('email', 100)->unique();
             $table->string('gender');
             $table->string('ip_address');
             $table->unsignedBigInteger('user_id');

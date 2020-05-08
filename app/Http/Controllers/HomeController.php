@@ -128,7 +128,7 @@ class HomeController extends Controller
             'password' => Hash::make("password")
         ]);
 
-       return redirect()->action('HomeController@index')->with('message', 'User Created');
+        $request->session()->flash('message', 'User Created Successfully. Username is '.$client->email.' and password is "password".');
     }
 
     public static function deleteClient($client) {
