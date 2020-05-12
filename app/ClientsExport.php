@@ -10,7 +10,7 @@ class ClientsExport implements FromCollection,WithHeadings {
 
     public function headings(): array {
         return [
-            "first_name", "last_name", "user_account"
+            "first_name", "last_name", "user_account", "num_of_clients"
         ];
     }
 
