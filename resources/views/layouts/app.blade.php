@@ -92,7 +92,7 @@
     </script>
     <script>
         $(document).ready(function() {
-            $('button#createBtn').click(function() {
+            $('input#createBtn').click(function() {
                 var row = $(this).closest('tr');
                 var email = $(row).children('td#email').html()
                 console.log(email)
@@ -107,10 +107,27 @@
                     {
                         if(data)
                         {
-                            window.location.href = 'home';
+                            $('div.flash-message').html(data);
                         } else {
                             console.log('nothing returned ')
                         }
+                    }
+                })
+            })
+            $('input#deleteBtn').click(function() {
+                var row = $(this).closest('tr');
+                var email = $(row).children('td#email').html()
+
+                console.log(email)
+
+                $.ajax({
+                    type:'DELETE',
+                    url:'/deleteClient',
+                    async: false,
+                    datatype: 'json',
+                    data: {'email': email},
+                    success: function(data){
+                        $('div.flash-message').html(data);
                     }
                 })
             })

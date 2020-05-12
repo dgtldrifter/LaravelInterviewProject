@@ -65,12 +65,31 @@
                     @endif
                 </div>
             </div>
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">
+                        Export Data to CSV
+                    </div>
+                    <div class="card-body">
+                        <form method="post" action="/exportData">
+                            {{ csrf_field() }}
+                            <input type="submit" class="btn btn-outline-secondary" name="exportcsv" value='CSV Export'>
+                        </form>
+                    </div>
+                    @if(session('message'))
+                        <div class="card-footer text-muted">
+                            {{ session('message') }}
+                        </div>
+                    @endif
+                </div>
+            </div>
         </div>
     </div>
     <?php
         $noOfRows = App\Client::getNumberOfClients();
         echo '<div class="align-content-center text-center"><p>There is a total of '.$noOfRows.' users that you\'re responsible for.</p></div>'
     ?>
+    <div class="align-content-center text-center flash-message"></div>
     <div class="container">
         <table id="datatable" class="table table-striped table-bordered" style="width:100%">
             <thead>
@@ -80,7 +99,7 @@
                     <th>Email Address</th>
                     <th>Gender</th>
                     <th>IP Address</th>
-                    <th>Add Client as User</th>
+                    <th>User Operations</th>
                 </tr>
             </thead>
             <tbody>
@@ -96,7 +115,8 @@
                         echo '<td id="email">'.$client->email.'</td>';
                         echo '<td id="gender">'.$client->gender.'</td>';
                         echo '<td id="ipAddress">'.$client->ip_address.'</td>';
-                        echo '<td><button id="createBtn" type="button" class="btn btn-outline-secondary" name="button" value="Create User"></td>';
+                        echo '<td><input id="createBtn" type="submit" class="btn btn-outline-secondary" name="createUser" value="Create User">
+                                <input id="deleteBtn" type="submit" class="btn btn-outline-danger" name="deleteUser" value="Delete User"></td>';
                         echo '</tr>';
                 }
                 }?>

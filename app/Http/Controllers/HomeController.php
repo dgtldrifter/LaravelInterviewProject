@@ -5,8 +5,13 @@ namespace App\Http\Controllers;
 use App\Client;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Hash;
 use Symfony\Component\Console\Output\ConsoleOutput;
+use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Concerns\WithHeadings;
+use App\ClientsExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class HomeController extends Controller
 {
@@ -93,6 +98,15 @@ class HomeController extends Controller
         return redirect()->action('HomeController@index')->with('message', "Data imported!");
     }
 
+    public function export(Request $request){
+
+        if ($request->input('exportcsv') != null ) {
+            return Excel::download(new ClientsExport, 'clients.csv');
+        }
+
+        return redirect()->action('PagesController@index');
+    }
+
     public function addSingleClient(Request $request) {
         $u_id = auth()->user()->id;
 
@@ -128,10 +142,16 @@ class HomeController extends Controller
             'password' => Hash::make("password")
         ]);
 
-        $request->session()->flash('message', 'User Created Successfully. Username is '.$client->email.' and password is "password".');
+        return "User Created Successfully. Username is ".$client->email." and password is 'Password'";
     }
 
-    public static function deleteClient($client) {
+    public static function deleteClient(Request $request) {
+        $email = $request->email;
 
+        Client::where('email', $email)->delete();
+
+        $request->session()->flash('message', 'User Deleted.');
+        return 'User '.$email.' Deleted';
     }
+
 }

@@ -23,3 +23,5 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::post('uploadFile', 'HomeController@uploadFile');
 Route::post('/addSingleClient', 'HomeController@addSingleClient');
 Route::post('/createUserFromClient', 'HomeController@createUserFromClient');
+Route::delete('/deleteClient', 'HomeController@deleteClient');
+Route::post('/exportData', 'HomeController@export');
